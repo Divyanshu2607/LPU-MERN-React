@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.myContainer {
+  margin: auto;
+}
+
+.myContainer > div {
+  /* height: 40px; */
+  margin: auto;
+  padding: 20px;
+  border: 1px solid black;
+  margin-bottom: 3vh;
+}
