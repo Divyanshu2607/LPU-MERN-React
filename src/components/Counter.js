@@ -5,18 +5,29 @@ class Counter extends Component {
     count: 0,
   };
 
-  increaseCount = () => {
-    this.setState({ count: this.state.count + 1 });
-    console.log(this.state.count);
-  };
-
   render = () => {
     return (
       <>
         <h1>The count is: {this.state.count}</h1>
         <div>
-          <button onClick={this.increaseCount}>Increase</button>
-          <button>Decrease</button> {/* Decrease by 2 but never less than 0 */}
+          <button
+            onClick={() => {
+              let count = this.state.count;
+              count = this.props.btn1OnClick(count);
+              this.setState({ count });
+            }}
+          >
+            {this.props.btn1Text}
+          </button>
+          <button
+            onClick={() => {
+              let count = this.state.count;
+              count = this.props.btn2OnClick(count);
+              this.setState({ count });
+            }}
+          >
+            {this.props.btn2Text}
+          </button>
         </div>
       </>
     );

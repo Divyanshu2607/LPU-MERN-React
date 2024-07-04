@@ -36,7 +36,24 @@ class App extends Component {
           />
         </div>
         <Test /> */}
+        <Counter
+          btn1Text="Increase"
+          btn2Text="Decrease"
+          btn1OnClick={(count) => {
+            return count + 1;
+          }}
+          btn2OnClick={(count) => {
+            if (count <= 1) {
+              return 0;
+            }
+            return count - 2;
+          }}
+        />
+        {/* Pass the text inside the button and the function to execute on click as a prop */}
         <Counter />
+        {/* Multiply by 2 and Divide by 2 */}
+        <Counter />
+        {/* Power of 2 and square root */}
       </div>
     );
   }
