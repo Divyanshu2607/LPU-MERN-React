@@ -1,0 +1,13 @@
+1. Create a Cart screen.
+2. In the card screen, there are two buttons.
+    a. "Add Item 1" -> adds one more item 1. If item 1 is absent, add it in the cart. Rs. 100
+    b. "Add Item 2" -> adds one more item 2. If item 2 is absent, add it in the cart. Rs. 150
+3. When an item is added, show it on the screen immediately.
+4. While showing an item, add a +, - and delete buttons
+    a. + will increase the count by 1
+    b. - will decrease the count by 1
+    c. delete will remove the item from the cart
+
+5. At the bottom, show total amount of the cart.
+
+PS: You can create as many components. Try using "useReducer". "useState" is acceptable.

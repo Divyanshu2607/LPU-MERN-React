@@ -1,4 +1,6 @@
-import { useState, useReducer } from "react";
+import { useReducer } from "react";
+import { DECREASE, INCREASE } from "../actions/counter.action";
+import counterReducer from "../reducers/counter.reducer";
 
 const Counter = (props) => {
   /**
@@ -10,21 +12,7 @@ const Counter = (props) => {
    */
   // const [state, setState] = useState({ count: props.startVal });
 
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case "INCREASE":
-        return { ...state, count: state.count + 1 };
-      case "DECREASE":
-        if (state.count - 1 >= 0) {
-          return { ...state, count: state.count - 1 };
-        }
-        return state;
-      default:
-        throw new Error("Pass valid action type");
-    }
-  };
-
-  const [state, dispatch] = useReducer(reducer, {
+  const [state, dispatch] = useReducer(counterReducer, {
     count: props.startVal,
   });
 
@@ -34,21 +22,14 @@ const Counter = (props) => {
       <div>
         <button
           onClick={() => {
-            // let count = state.count;
-            // count = props.btn1OnClick(count);
-            // setState({ count });
-            // setState({ count: state.count + 1 });
-            dispatch({ type: "INCREASE" });
+            dispatch({ type: INCREASE });
           }}
         >
           {props.btn1Text}
         </button>
         <button
           onClick={() => {
-            // let count = state.count;
-            // count = props.btn2OnClick(count);
-            // setState({ count });
-            dispatch({ type: "DECREASE" });
+            dispatch({ type: DECREASE });
           }}
         >
           {props.btn2Text}
