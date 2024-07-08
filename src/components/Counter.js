@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 
 const Counter = (props) => {
   /**
@@ -8,7 +8,25 @@ const Counter = (props) => {
    * arr[0] = state var
    * arr[1] = function to change state
    */
-  const [state, setState] = useState({ count: props.startVal });
+  // const [state, setState] = useState({ count: props.startVal });
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "INCREASE":
+        return { ...state, count: state.count + 1 };
+      case "DECREASE":
+        if (state.count - 1 >= 0) {
+          return { ...state, count: state.count - 1 };
+        }
+        return state;
+      default:
+        throw new Error("Pass valid action type");
+    }
+  };
+
+  const [state, dispatch] = useReducer(reducer, {
+    count: props.startVal,
+  });
 
   return (
     <>
@@ -16,18 +34,21 @@ const Counter = (props) => {
       <div>
         <button
           onClick={() => {
-            let count = state.count;
-            count = props.btn1OnClick(count);
-            setState({ count });
+            // let count = state.count;
+            // count = props.btn1OnClick(count);
+            // setState({ count });
+            // setState({ count: state.count + 1 });
+            dispatch({ type: "INCREASE" });
           }}
         >
           {props.btn1Text}
         </button>
         <button
           onClick={() => {
-            let count = state.count;
-            count = props.btn2OnClick(count);
-            setState({ count });
+            // let count = state.count;
+            // count = props.btn2OnClick(count);
+            // setState({ count });
+            dispatch({ type: "DECREASE" });
           }}
         >
           {props.btn2Text}
@@ -38,3 +59,32 @@ const Counter = (props) => {
 };
 
 export default Counter;
+
+/**
+ * In F components, there are 2 types of hooks.
+ * 1. That deal with state - useState | useReducer
+ * 2. That don't deal with state - useEffect
+ *
+ * useReducer is a function, that will return an array which contains two values
+ * 1. arr[0] is the state
+ * 2. arr[1] is a function that will be used to change the state (it is called dispatch)
+ *
+ * useReducer takes 2 arguments
+ * 1. A function that contains logic to change the state (called reducer)
+ * 2. Initial value of state
+ *
+ * reducer
+ * It is a function that takes 2 arguments to change the state
+ * 1. The state
+ * 2. An action object
+ * The return value of the reducer function is the new value of state
+ *
+ * Action object
+ * It is an object that contains two properties
+ * 1. type: Which tells us what type of state update we have to do
+ * 2. payload (optional): Which tells us any info needed for the new value of state
+ *
+ * Dispatch Func
+ * It is responsible for the state change
+ * It takes only 1 arg which is the action object
+ */
