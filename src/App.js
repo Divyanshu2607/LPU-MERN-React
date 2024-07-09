@@ -1,17 +1,13 @@
 import { Component } from "react";
 import "./App.css";
-import ColorScreen from "./screens/ColorScreen";
-import CounterScreen from "./screens/CounterScreen";
-import CartScreen from "./screens/CartScreen";
+import LoginScreen from "./screens/LoginScreen";
 
 class App extends Component {
   render() {
     // return <CounterScreen />;
     return (
       <div style={{ padding: "2vh 10%" }}>
-        {/* <ColorScreen />
-        <CounterScreen /> */}
-        <CartScreen />
+        <LoginScreen />
       </div>
     );
   }
