@@ -1,16 +1,22 @@
-import { useReducer } from "react";
-import ToDoListCard from "../components/ToDoListCard";
-import ToDoListForm from "../components/ToDoListForm";
-import toDoReducer from "../reducers/todo.reducer";
+import { useEffect, useReducer } from "react";
 import {
   ADD_TASK,
   DELETE_TASK,
+  INITIALIZE,
   MARK_DONE,
   MARK_UNDONE,
 } from "../actions/todo.action";
+import ToDoListCard from "../components/ToDoListCard";
+import ToDoListForm from "../components/ToDoListForm";
+import toDoReducer from "../reducers/todo.reducer";
+import tasks from "../utils/tasks";
 
-const ToDoLostScreen = () => {
+const ToDoListScreen = () => {
   const [taskList, dispatch] = useReducer(toDoReducer, []);
+
+  useEffect(() => {
+    dispatch({ type: INITIALIZE, payload: tasks });
+  }, []);
 
   const addTask = (task) => {
     dispatch({ type: ADD_TASK, payload: { task } });
@@ -50,4 +56,4 @@ const ToDoLostScreen = () => {
   );
 };
 
-export default ToDoLostScreen;
+export default ToDoListScreen;

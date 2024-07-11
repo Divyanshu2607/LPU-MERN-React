@@ -1,6 +1,7 @@
 import {
   ADD_TASK,
   DELETE_TASK,
+  INITIALIZE,
   MARK_DONE,
   MARK_UNDONE,
 } from "../actions/todo.action";
@@ -25,6 +26,8 @@ const toDoReducer = (state, action) => {
       index = payload.index;
       currentList[index].isComplete = false;
       return [...currentList];
+    case INITIALIZE:
+      return [...payload];
     default:
       throw new Error("Use valid action");
   }

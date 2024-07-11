@@ -1,16 +1,40 @@
-import { Component } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import ToDoLostScreen from "./screens/ToDoListScreen";
+import CounterScreen from "./screens/CounterScreen";
+import LoginScreen from "./screens/LoginScreen";
+import ToDoListScreen from "./screens/ToDoListScreen";
+import StudentPortal from "./screens/StudentPortal";
+import AddBookScreen from "./screens/AddBookScreen";
 
-class App extends Component {
-  render() {
-    // return <CounterScreen />;
-    return (
-      <div style={{ padding: "2vh 10%" }}>
-        <ToDoLostScreen />
-      </div>
-    );
-  }
-}
+const router = createBrowserRouter([
+  {
+    path: "/todo",
+    element: <ToDoListScreen />,
+  },
+  {
+    path: "/counter",
+    element: <CounterScreen />,
+  },
+  {
+    path: "/login",
+    element: <LoginScreen />,
+  },
+  {
+    path: "/home",
+    element: <StudentPortal />,
+  },
+  {
+    path: "/admin/add-book",
+    element: <AddBookScreen />,
+  },
+]);
+
+const App = () => {
+  return (
+    <div style={{ padding: "2vh 10%" }}>
+      <RouterProvider router={router} />
+    </div>
+  );
+};
 
 export default App;
