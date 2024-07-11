@@ -1,18 +1,18 @@
 export class LocalStorage {
-  static addToLocalStorage(key, value) {
+  static add(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  static getFromLocalStorage(key) {
+  static get(key) {
     let obj = localStorage.getItem(key);
     return JSON.parse(obj);
   }
 
-  static removeFromLocalStorage(key) {
+  static remove(key) {
     localStorage.removeItem(key);
   }
 
-  static clearLocalStorage() {
+  static clear() {
     localStorage.clear();
   }
 }

@@ -1,10 +1,15 @@
+import { useEffect, useContext } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
+import AddBookScreen from "./screens/AddBookScreen";
 import CounterScreen from "./screens/CounterScreen";
 import LoginScreen from "./screens/LoginScreen";
-import ToDoListScreen from "./screens/ToDoListScreen";
 import StudentPortal from "./screens/StudentPortal";
-import AddBookScreen from "./screens/AddBookScreen";
+import ToDoListScreen from "./screens/ToDoListScreen";
+import {
+  Context as StudentContext,
+  Provider as StudentProvider,
+} from "./contexts/StudentContext";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +35,12 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
+  const { localSignIn } = useContext(StudentContext);
+
+  useEffect(() => {
+    localSignIn();
+  }, []);
+
   return (
     <div style={{ padding: "2vh 10%" }}>
       <RouterProvider router={router} />
@@ -37,4 +48,12 @@ const App = () => {
   );
 };
 
-export default App;
+const Test = () => {
+  return (
+    <StudentProvider>
+      <App />
+    </StudentProvider>
+  );
+};
+
+export default Test;

@@ -1,10 +1,8 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { isValidCredential } from "../validator/form.validator";
-import { LocalStorage } from "../utils/localstorage.util";
-import { LibraryClient } from "../api/client/LibraryAppClient";
 import { loginStudent } from "../api/endpoints/student";
+import { LocalStorage } from "../utils/localstorage.util";
+import { Context as StudentContext } from "../contexts/StudentContext";
 
 const LoginScreen = () => {
   const [credentials, setCredentials] = useState({
@@ -12,7 +10,20 @@ const LoginScreen = () => {
     password: "",
   });
 
+  const {
+    state: { student },
+  } = useContext(StudentContext);
+
+  useEffect(() => {
+    if (!student) {
+      return;
+    }
+    redirectToStudentPortal();
+  }, []);
+
   const navigate = useNavigate();
+
+  const redirectToStudentPortal = () => navigate("/home");
 
   const handleChange = (e) => {
     setCredentials({
@@ -24,7 +35,7 @@ const LoginScreen = () => {
   return (
     <>
       <div>
-        <h1> Login</h1>
+        <h1>Login {student?.firstName}</h1>
         <form
           className="ui form"
           onSubmit={async (e) => {
@@ -39,9 +50,9 @@ const LoginScreen = () => {
                 credentialToPass
               );
               console.log("Login Success");
-              LocalStorage.addToLocalStorage("student", studentData.student);
-              LocalStorage.addToLocalStorage("token", studentData.token);
-              navigate("/home");
+              LocalStorage.add("student", studentData.student);
+              LocalStorage.add("token", studentData.token);
+              redirectToStudentPortal();
             } catch (err) {
               console.error(err);
             }
