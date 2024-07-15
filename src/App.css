@@ -54,3 +54,7 @@
 .done {
   background: #ddede5 !important;
 }
+
+.overdue {
+  color: red;
+}

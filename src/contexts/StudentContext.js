@@ -7,7 +7,9 @@ import createDataContext from "./createDataContext";
 const signInStudent = (dispatch) => {
   return async (credential) => {
     try {
-      const { student, token } = await loginStudent(credential);
+      const {
+        data: { student, token },
+      } = await loginStudent(credential);
       dispatch({ type: SIGN_IN, payload: { student, token } });
     } catch (err) {
       dispatch({ type: SIGN_OUT });

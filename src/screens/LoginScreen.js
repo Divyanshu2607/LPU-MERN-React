@@ -1,7 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginStudent } from "../api/endpoints/student";
-import { LocalStorage } from "../utils/localstorage.util";
 import { Context as StudentContext } from "../contexts/StudentContext";
 
 const LoginScreen = () => {
@@ -12,6 +10,7 @@ const LoginScreen = () => {
 
   const {
     state: { student },
+    signInStudent,
   } = useContext(StudentContext);
 
   useEffect(() => {
@@ -19,7 +18,7 @@ const LoginScreen = () => {
       return;
     }
     redirectToStudentPortal();
-  }, []);
+  }, [student]);
 
   const navigate = useNavigate();
 
@@ -46,12 +45,7 @@ const LoginScreen = () => {
               registrationNumber: Number(credentials.registrationNumber),
             };
             try {
-              const { data: studentData } = await loginStudent(
-                credentialToPass
-              );
-              console.log("Login Success");
-              LocalStorage.add("student", studentData.student);
-              LocalStorage.add("token", studentData.token);
+              await signInStudent(credentialToPass);
               redirectToStudentPortal();
             } catch (err) {
               console.error(err);
