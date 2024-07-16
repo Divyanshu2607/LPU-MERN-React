@@ -3,3 +3,5 @@ import { LibraryClient } from "../client/LibraryAppClient";
 export const addBook = async (book) => {
   return await LibraryClient.post("/book/add", { ...book });
 };
+
+export const getAllBooks = async () => await LibraryClient.get("/book/get/all");

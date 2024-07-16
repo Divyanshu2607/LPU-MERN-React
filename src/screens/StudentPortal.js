@@ -7,31 +7,40 @@ const StudentPortal = () => {
     state: { student },
   } = useContext(StudentContext);
 
+  const representativeSections = [
+    {
+      path: "/admin/add-book",
+      title: "Add Book",
+      description: "Add a new book",
+    },
+    {
+      path: "/admin/books",
+      title: "Book List",
+      description: "Show all books",
+    },
+    {
+      path: "/admin/issue-book",
+      title: "Issue a new book",
+      description: "Issue a new book to a student",
+    },
+  ];
+
   const showClassRepresentativeSections = () => {
-    return (
-      <>
+    return representativeSections.map((section, index) => {
+      return (
         <div
+          key={index * 2}
           className="card"
-          onClick={() => navigate("/admin/add-book")}
+          onClick={() => navigate(section.path)}
           style={{ cursor: "pointer" }}
         >
           <div className="content">
-            <div className="header">Add Book</div>
-            <div className="description">Add a new book</div>
+            <div className="header">{section.title}</div>
+            <div className="description">{section.description}</div>
           </div>
         </div>
-        <div
-          className="card"
-          onClick={() => navigate("/admin/books")}
-          style={{ cursor: "pointer" }}
-        >
-          <div className="content">
-            <div className="header">Book List</div>
-            <div className="description">Show all books</div>
-          </div>
-        </div>
-      </>
-    );
+      );
+    });
   };
 
   const navigate = useNavigate();
