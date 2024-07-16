@@ -5,5 +5,8 @@ export const loginStudent = async (credentials) => {
   if (!isValidCredential(credentials)) {
     throw new Error("Invalid Credentials");
   }
-  return LibraryClient.post("/student/login", credentials);
+  return await LibraryClient.post("/student/login", credentials);
 };
+
+export const getAllStudents = async () =>
+  await LibraryClient.get("/student/get/all");

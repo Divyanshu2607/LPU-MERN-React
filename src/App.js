@@ -12,6 +12,8 @@ import CounterScreen from "./screens/CounterScreen";
 import LoginScreen from "./screens/LoginScreen";
 import StudentPortal from "./screens/StudentPortal";
 import ToDoListScreen from "./screens/ToDoListScreen";
+import AddIssueBookScreen from "./screens/AddIssueBookScreen";
+import BookScreen from "./screens/BookScreen";
 
 const router = createBrowserRouter([
   {
@@ -43,8 +45,12 @@ const router = createBrowserRouter([
     element: <BookListScreen />,
   },
   {
+    path: "/admin/books/:bookIsbnNo",
+    element: <BookScreen />,
+  },
+  {
     path: "/admin/issue-book",
-    element: <h1>Issue a new book</h1>,
+    element: <AddIssueBookScreen />,
   },
 ]);
 

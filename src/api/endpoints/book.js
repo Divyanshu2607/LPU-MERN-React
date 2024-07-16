@@ -5,3 +5,9 @@ export const addBook = async (book) => {
 };
 
 export const getAllBooks = async () => await LibraryClient.get("/book/get/all");
+
+export const getBookByIsbnNo = async (isbnNumber) =>
+  await LibraryClient.get(`/book/${isbnNumber}`);
+
+export const updateBook = async (bookObj) =>
+  await LibraryClient.put("/book", { ...bookObj });
